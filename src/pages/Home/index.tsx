@@ -1,8 +1,13 @@
 import styles from './index.module.scss';
+import DarkModeToggle from '~/components/DarkModeToggle';
 
 function Home() {
   return (
-    <h1 className={styles['home--heading__color']}>Hello world, I'm John Colella</h1>
+    <header className={styles['header']}>
+      <h1 className={styles['header--title-primary']}>John Colella</h1>
+
+      <DarkModeToggle />
+    </header>
   );
 }
 

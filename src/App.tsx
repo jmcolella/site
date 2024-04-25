@@ -1,8 +1,11 @@
+import { DarkModeProvider } from './contexts/DarkMode';
 import Home from './pages/Home';
 
 function App() {
   return (
-    <Home />
+    <DarkModeProvider>
+      <Home />
+    </DarkModeProvider>
   );
 }
 

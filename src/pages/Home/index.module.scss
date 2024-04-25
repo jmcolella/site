@@ -1,4 +1,86 @@
-.home--heading__color {
-  color: aquamarine;
-  text-align: center;
+@use 'src/assets/scss/_colors.scss' as *;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+[data-theme="dark"] {
+  .header {
+    border-bottom: 1px solid $secondary;
+  }
+}
+
+[data-theme="light"] {
+  .header {
+    border-bottom: 1px solid $black;
+  }
+}
+
+.header--title-primary {
+  margin: 0;
+  color: $primary;
+}
+
+.header--title-accent {
+  color: $accent;
+}
+
+// Accessible hidden
+.toggle--control {
+  position: absolute; 
+  overflow: hidden; 
+  clip: rect(0 0 0 0); 
+  height: 1px;
+  width: 1px; 
+  margin: -1px;
+  padding: 0;
+  border: 0; 
+}
+
+.toggle {
+  background-color: $primary;
+  border: 1px solid $secondary;
+  border-radius: 15px;
+  height: 25px;
+  width: 50px;
+  position: relative;
+  cursor: pointer;
+}
+
+.toggle--circle {
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  top: calc(calc(25px - 25px) / 2);
+  transition: all ease-in 0.2s;
+}
+
+.toggle--circle:hover {
+  box-shadow: 0px 0px 2px 1px $black;
+}
+
+.toggle--control:not(:checked) + .toggle {
+  background-color: $black;
+  border: 1px solid $secondary;
+
+
+  .toggle--circle {
+    background-color: $secondary;
+
+    left: 0%;
+  }
+}
+
+.toggle--control:checked + .toggle {
+  background-color: $secondary;
+  border: 1px solid $black;
+
+  .toggle--circle {
+    background-color: $black;
+    left: calc(100% - 25px);
+  }
 }

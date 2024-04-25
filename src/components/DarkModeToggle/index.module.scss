@@ -1,0 +1,68 @@
+
+@use 'src/assets/scss/_colors.scss' as *;
+
+$toggle-height: 30px;
+$toggle-circle: 25px;
+$toggle-circle-spacing: 2px;
+
+.toggle {
+  background-color: $primary;
+  border: 1px solid $secondary;
+  border-radius: 15px;
+  height: $toggle-height;
+  width: 55px;
+  position: relative;
+  cursor: pointer;
+}
+
+.toggle--container {
+  display: flex;
+  align-items: center;
+}
+
+.toggle--circle {
+  border-radius: 50%;
+  height: $toggle-circle;
+  width: $toggle-circle;
+  position: absolute;
+  top: calc(calc($toggle-height - $toggle-circle) / 2);
+  transition: all ease-in 0.2s;
+}
+
+.toggle--circle:hover {
+  box-shadow: 0px 0px 2px 1px $black;
+}
+
+.toggle--control:not(:checked) + .toggle {
+  background-color: $black;
+  border: 1px solid $secondary;
+
+
+  .toggle--circle {
+    background-color: $secondary;
+
+    left: calc(0% + $toggle-circle-spacing);
+  }
+}
+
+.toggle--control:checked + .toggle {
+  background-color: $secondary;
+  border: 1px solid $black;
+
+  .toggle--circle {
+    background-color: $black;
+    left: calc(100% - $toggle-circle - $toggle-circle-spacing);
+  }
+}
+
+// Accessible hidden
+.toggle--control {
+  position: absolute; 
+  overflow: hidden; 
+  clip: rect(0 0 0 0); 
+  height: 1px;
+  width: 1px; 
+  margin: -1px;
+  padding: 0;
+  border: 0; 
+}

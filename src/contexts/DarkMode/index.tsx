@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { DarkModeEnum } from "./types";
 
 interface DarkModeContextValue {
@@ -8,22 +8,24 @@ interface DarkModeContextValue {
 
 export const DarkModeContext = createContext<DarkModeContextValue>({ mode: DarkModeEnum.LIGHT, toggleMode: () => {} });
 
+const getInitialColorScheme = (): DarkModeEnum => (window?.matchMedia("(prefers-color-scheme: dark)")?.matches ? DarkModeEnum.DARK : DarkModeEnum.LIGHT);
+
 interface DarkModeProviderProps {
   children: React.ReactNode;
 }
 export const DarkModeProvider = ({children}: DarkModeProviderProps) => {
-  const [mode, setMode] = useState<DarkModeEnum>(() => {
-    if (window?.matchMedia("(prefers-color-scheme: dark)")?.matches) {
-      return DarkModeEnum.DARK;
-    } else {
-      return DarkModeEnum.LIGHT;
-    }
-  });
+  const [mode, setMode] = useState<DarkModeEnum>(getInitialColorScheme);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', getInitialColorScheme());
+  }, []);
 
   const toggleMode = () => {
-    document.documentElement.setAttribute('data-theme', mode === DarkModeEnum.DARK ? 'light' : 'dark');
+    const nextMode = mode === DarkModeEnum.DARK ? DarkModeEnum.LIGHT : DarkModeEnum.DARK;
 
-    setMode(mode === DarkModeEnum.DARK ? DarkModeEnum.LIGHT : DarkModeEnum.DARK);
+    document.documentElement.setAttribute('data-theme', nextMode);
+
+    setMode(nextMode);
   };
 
   return (

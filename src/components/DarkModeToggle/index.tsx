@@ -10,7 +10,7 @@ function DarkModeToggle() {
     <div className={styles['toggle--container']}>
       <input id="dark-mode-toggle" className={styles['toggle--control']} type="checkbox" defaultChecked={mode === DarkModeEnum.LIGHT} />
 
-      <label className={styles['toggle']} htmlFor="dark-mode-toggle" onClick={toggleMode}>
+      <label className={styles['toggle']} htmlFor="dark-mode-toggle" onClick={toggleMode} aria-label='dark-mode-toggle'>
         <div className={styles['toggle--circle']}/>
       </label>
     </div>

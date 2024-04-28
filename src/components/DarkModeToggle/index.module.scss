@@ -13,6 +13,7 @@ $toggle-circle-spacing: 2px;
   width: 55px;
   position: relative;
   cursor: pointer;
+  transition: all ease-in 0.2s;
 }
 
 .toggle--container {
@@ -25,18 +26,17 @@ $toggle-circle-spacing: 2px;
   height: $toggle-circle;
   width: $toggle-circle;
   position: absolute;
-  top: calc(calc($toggle-height - $toggle-circle) / 2);
+  top: calc(calc($toggle-height - $toggle-circle - 2px) / 2);
   transition: all ease-in 0.2s;
-}
-
-.toggle--circle:hover {
-  box-shadow: 0px 0px 2px 1px $black;
 }
 
 .toggle--control:not(:checked) + .toggle {
   background-color: $black;
   border: 1px solid $secondary;
 
+  &:hover {
+    box-shadow: 0px 0px 2px 1px $secondary;
+  }
 
   .toggle--circle {
     background-color: $secondary;
@@ -48,6 +48,10 @@ $toggle-circle-spacing: 2px;
 .toggle--control:checked + .toggle {
   background-color: $secondary;
   border: 1px solid $black;
+
+  &:hover {
+    box-shadow: 0px 0px 2px 1px $black;
+  }
 
   .toggle--circle {
     background-color: $black;
